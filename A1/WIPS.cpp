@@ -174,7 +174,6 @@ void configuration(){
     cout << endl;
     while (getline (targetFile, aLine))
     {
-		cout << aLine << endl;
         size_t pos = aLine.find(".txt");
         size_t gridPos = aLine.find("=");
         
@@ -187,17 +186,22 @@ void configuration(){
             min = stoi(tokenStringVector1[0]);
             max = stoi(tokenStringVector1[1]);
             gridsize =(max-min)+1;
-
+          
             if(gridCallCount == 0){
                 coordinatearray = new coordinateStruct[1];
                 coordinatearray[0].gridXmax = max;
                 coordinatearray[0].gridXmin = min;
                 coordinatearray[0].gridXsize = gridsize;
+                cout<<endl;
+                cout << "Reading in " << tokenStringVector[0] <<" : " << min << "-" << max <<"...done!"<<endl;
                 gridCallCount++;
             }else if(gridCallCount == 1){
                 coordinatearray[0].gridYmax = max;
                 coordinatearray[0].gridYmin = min;
                 coordinatearray[0].gridYsize = gridsize;
+                cout << "Reading in " << tokenStringVector[0] <<" : " << min << "-" << max <<"...done!"<<endl;
+                cout<<endl;
+                cout << "Storing Data from input file :"<<endl;
                 gridCallCount = 0;
             }
             tokenStringVector.clear();
@@ -206,46 +210,10 @@ void configuration(){
 	}
     targetFile.ignore();
     targetFile.close();
+    cout << endl;
+    cout <<"All records successfully stored. Going back to main menu" <<endl;
+    cout << endl;
 
-
-    cout << endl;
-    cout << "for city"<< endl;
-
-    for (int i=0; i< 14; i++){
-        cout << cityLocationArray [i].id << endl;
-        cout << cityLocationArray [i].value << endl;
-        cout << cityLocationArray [i].xPoint << endl;
-        cout << cityLocationArray [i].yPoint << endl;
-        cout << endl;
-    }
-    cout << endl;
-    cout << "for cloud"<< endl;
-    for (int j=0; j<81; j++){
-       
-        cout << cloudCoverArray [j].value << endl;
-        cout << cloudCoverArray [j].xPoint << endl;
-        cout << cloudCoverArray [j].yPoint << endl;
-        cout << endl;
-    }
-    cout << endl;
-    cout << "for pressure"<< endl;
-    for (int k=0; k<81; k++){
-     
-        cout << pressureArray [k].value << endl;
-        cout << pressureArray [k].xPoint << endl;
-        cout << pressureArray [k].yPoint << endl;
-        cout << endl;
-    }
-		
-    cout << endl;
-    cout << "for coordinate"<< endl;
-    cout<< coordinatearray[0].gridXmax << endl;
-    cout<< coordinatearray[0].gridXmin << endl;
-    cout<< coordinatearray[0].gridXsize << endl;
-    cout<< coordinatearray[0].gridYmax << endl;
-    cout<< coordinatearray[0].gridYmin << endl;
-    cout<< coordinatearray[0].gridYsize << endl;
-    cout << endl;
     
 }
 
@@ -253,9 +221,7 @@ void configuration(){
 void readFile(string filename){
     
     fstream targetFile (filename.c_str(), fstream::in);
-    cout << endl;
-    cout << "Reading file : " << filename << endl;
-    cout << endl;
+    cout << "Reading file : " << filename <<"...done!"<< endl;
     string aLine;
     string coordinates;
     vector<string> tokenStringVector;
